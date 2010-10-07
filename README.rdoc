@@ -1,0 +1,46 @@
+= Ruby wrapper for Trademe API
+
+API available at: {http://developer.trademe.co.nz}[http://developer.trademe.co.nz]  
+
+== Sample usage:
+
+  gateway = Trademe::Gateway.new
+  request_token = gateway.generate_request_token(callback, key, secret)
+  session[:request_token] = request_token
+  redirect_to request_token.authorize_url
+
+Upon return to callback url (with params[:oauth_verifier] set):
+
+  gateway = Trademe::Gateway.new
+  gateway.request_token = session[:request_token]
+  gateway.get_access_token(params[:oauth_verifier])
+
+You are now verified! 
+
+Currently the OAuth system has been implemented so that searches are counted against the "Authenticated rate limit" as per the Trademe website.
+You can perform searches via the gateway if you have been authorized or not, but non authorized searches are limited to 60 requests per hour!
+
+Perform API searches via:
+
+  gateway.search "property/residential", :search_string => "flash apartment"
+
+This will return an Array of Trademe::Models::Listing
+
+
+== To come:
+
+Planning to add these very soon!
+* Total API coverage
+* Requests for private data that needs authentication
+* Write requests
+
+== Contributions
+
+Feel free to get in touch! It is very early days as the Trademe API was release a week ago.
+If you want to push a patch, please fork the project, commit the patch to the fork and submit a pull request.
+
+For anything else, send me a me a message via Github {http://github.com/clarketus}[http://github.com/clarketus]
+
+== License
+
+This code is free to use under the terms of the MIT license.
