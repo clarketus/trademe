@@ -1,4 +1,4 @@
-= Ruby wrapper for Trademe API
+= Ruby wrapper for the Trademe API
 
 API available at: {http://developer.trademe.co.nz}[http://developer.trademe.co.nz]  
 
