@@ -13,6 +13,7 @@ rescue Bundler::GemNotFound => e
 end if File.exist?(gemfile)
 
 Bundler.require(:default) if defined?(Bundler)
+require 'yajl' # gemspec in Gemfile pulls from gemspec, but cant define custom require statements there!
 
 require 'net/http'
 require 'cgi'
