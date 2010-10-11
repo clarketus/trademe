@@ -1,6 +1,7 @@
 source :rubygems
 
-gemspec
+gem 'oauth'
+gem 'yajl-ruby', :require => 'yajl'
 
 group :test do
   gem 'mocha'

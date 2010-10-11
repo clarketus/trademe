@@ -1,5 +1,10 @@
+require "rubygems"
+require "bundler/setup"
+
 require 'trademe'
 require 'test/unit'
+
+Bundler.require(:default)
 Bundler.require(:test)
 
 module Trademe::Testing
