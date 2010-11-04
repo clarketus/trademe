@@ -22,7 +22,7 @@ You can perform searches via the gateway if you have been authorized or not, but
 
 Perform API searches via:
 
-  gateway.search "property/residential", :search_string => "flash apartment"
+  gateway.search "property/residential", :search_string => "flash apartment", :date_from => 4.hours.ago
 
 This will return an Array of Trademe::Models::Listing
 
