@@ -39,7 +39,7 @@ module Trademe
       end
 
       def send_request(path)        
-        json = if !authorized?        
+        response = if !authorized?        
           uri = URI.parse("#{protocol}://#{@domain}")
           Net::HTTP.get uri.host, path
         else
@@ -47,9 +47,11 @@ module Trademe
           res.body
         end
                 
-        ::Yajl::Parser.new.parse json
-      rescue ::Yajl::ParseError
-        nil
+        json = ::Yajl::Parser.new.parse(response)
+        raise TrademeApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
+        json
+      rescue ::Yajl::ParseError => e
+        raise TrademeApiError.new "Bad JSON response #{response.inspect}"
       end
 
       def protocol
@@ -61,4 +63,6 @@ module Trademe
       end
     
   end
+  
+  class TrademeApiError < StandardError; end
 end
