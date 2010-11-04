@@ -48,10 +48,10 @@ module Trademe
         end
                 
         json = ::Yajl::Parser.new.parse(response)
-        raise TrademeApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
+        raise ApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
         json
       rescue ::Yajl::ParseError => e
-        raise TrademeApiError.new "Bad JSON response #{response.inspect}"
+        raise ApiError.new "Bad JSON response #{response.inspect}"
       end
 
       def protocol
@@ -64,5 +64,5 @@ module Trademe
     
   end
   
-  class TrademeApiError < StandardError; end
+  class ApiError < StandardError; end
 end

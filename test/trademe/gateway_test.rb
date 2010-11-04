@@ -42,7 +42,7 @@ class GatewayTest < Test::Unit::TestCase
       end
       
       should "raise an exception" do
-        assert_raises Trademe::TrademeApiError do
+        assert_raises Trademe::ApiError do
           @gateway.search "property/residential", :search_string => "nice", :date_from => Time.parse("Wed, 03 Nov 2010 05:29:02 UTC 00:00")
         end
       end
@@ -54,7 +54,7 @@ class GatewayTest < Test::Unit::TestCase
       end
       
       should "raise an exception" do
-        assert_raises Trademe::TrademeApiError do
+        assert_raises Trademe::ApiError do
           @gateway.search "property/residential", :search_string => "nice", :date_from => Time.parse("Wed, 03 Nov 2010 05:29:02 UTC 00:00")
         end
       end
