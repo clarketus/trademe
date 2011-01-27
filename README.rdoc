@@ -5,16 +5,18 @@ API available at: {http://developer.trademe.co.nz}[http://developer.trademe.co.n
 == Sample usage:
 
   gateway = Trademe::Gateway.new
-  request_token = gateway.generate_request_token(callback, key, secret)
-  session[:request_token] = request_token
-  redirect_to request_token.authorize_url
+  authorize_url = gateway.generate_request_token(callback, key, secret)
+  session[:request_token] = gateway.request_token
+  redirect_to authorize_url
 
 Upon return to callback url (with params[:oauth_verifier] set):
 
   gateway = Trademe::Gateway.new
   gateway.request_token = session[:request_token]
-  gateway.get_access_token(params[:oauth_verifier])
-
+  if gateway.get_access_token(params[:oauth_verifier])
+    session[:access_token] = gateway.access_token
+  end
+  
 You are now verified! 
 
 Currently the OAuth system has been implemented so that searches are counted against the "Authenticated rate limit" as per the Trademe website.
