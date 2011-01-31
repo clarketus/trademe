@@ -6,6 +6,7 @@ module Trademe
     FORMAT = "json"
     
     include Authentication
+    include MyTrademe
     
     def initialize(opts={})
       @domain = opts[:domain] || DOMAIN
@@ -38,7 +39,7 @@ module Trademe
         }.join("&")
       end
 
-      def send_request(path)        
+      def send_request(path)
         response = if !authorized?        
           uri = URI.parse("#{protocol}://#{@domain}")
           Net::HTTP.get uri.host, path
