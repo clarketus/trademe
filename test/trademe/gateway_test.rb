@@ -23,7 +23,7 @@ class GatewayTest < Test::Unit::TestCase
 
     context "with stubbed response" do
       setup do
-        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02.0Z").returns(open_mock("listing_search.json"))
+        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02Z").returns(open_mock("listing_search.json"))
       end
       
       should "accept a time arguement, correctly parse into a date string and then return listing array" do
@@ -38,7 +38,7 @@ class GatewayTest < Test::Unit::TestCase
     
     context "with stubbed bad response" do
       setup do
-        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02.0Z").returns(open_mock("bad_response.json"))
+        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02Z").returns(open_mock("bad_response.json"))
       end
       
       should "raise an exception" do
@@ -50,7 +50,7 @@ class GatewayTest < Test::Unit::TestCase
     
     context "with stubbed garbled response" do
       setup do
-        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02.0Z").returns("afdasfagag")
+        Net::HTTP.expects(:get).with("api.trademe.co.nz", "/v1/Search/Property/Residential.json?search_string=nice&date_from=2010-11-03T05%3A29%3A02Z").returns("afdasfagag")
       end
       
       should "raise an exception" do

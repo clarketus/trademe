@@ -27,9 +27,8 @@ module Trademe
     
       def urlize(params)
         params.map{|k,v|
-          value = if v.respond_to?(:utc) && v.respond_to?(:strftime)
-            ms = v.utc.usec.to_s[0..1].to_i # probably a better way to do this
-            v.utc.strftime("%Y-%m-%dT%H:%M:%S.#{ms}Z") # time format trademe API accepts
+          value = if v.respond_to?(:utc) && v.respond_to?(:iso8601)
+            v.utc.iso8601 # time format trademe API accepts
           else
             v.to_s
           end
