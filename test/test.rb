@@ -1,20 +1,18 @@
-require "rubygems"
+ENV["RAILS_ENV"] = "test"
+
 require "bundler/setup"
+Bundler.setup
+
+require 'test/unit'
+require 'shoulda'
+require 'mocha'
 
 require 'trademe'
-require 'test/unit'
-
-Bundler.require(:default)
-Bundler.require(:test)
 
 module Trademe::Testing
-  module Helpers
-    def open_mock(file)
-      File.read(File.dirname(__FILE__) + "/mocks/" + file) 
-    end
+  def open_mock(file)
+    File.read(File.dirname(__FILE__) + "/mocks/" + file) 
   end
-  
-  include Helpers
 end
 
 class Test::Unit::TestCase

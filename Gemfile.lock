@@ -1,18 +1,24 @@
+PATH
+  remote: .
+  specs:
+    trademe (0.1)
+      oauth
+      yajl-ruby
+
 GEM
   remote: http://rubygems.org/
   specs:
-    mocha (0.9.8)
-      rake
-    oauth (0.4.3)
-    rake (0.8.7)
+    mocha (0.9.12)
+    oauth (0.4.4)
     shoulda (2.11.3)
-    yajl-ruby (0.7.8)
+    test-unit (2.2.0)
+    yajl-ruby (0.8.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   mocha
-  oauth
   shoulda
-  yajl-ruby
+  test-unit
+  trademe!
