@@ -6,7 +6,7 @@ require 'yajl'
 require 'oauth'
 
 module Trademe
-  VERSION = "0.1"
+  VERSION = "0.1.1"
 end
 
 require "trademe/models/listing"
