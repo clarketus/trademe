@@ -1,5 +1,6 @@
 require 'net/http'
 require 'cgi'
+require 'time' # needed in 1.9.2-p180
 
 require 'yajl'
 require 'oauth'
