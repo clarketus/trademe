@@ -5,16 +5,14 @@ module Trademe
 
     # authorize_url EG: "https://secure.trademe.co.nz/Oauth/Authorize?oauth_token=50277019F3C05999C6599D6801C4607F73"
     def generate_request_token(callback, key, secret)
-      @consumer = OAuth::Consumer.new(key, secret, { 
-        :site               => "https://secure.trademe.co.nz",
-        :request_token_path => "/Oauth/RequestToken",
-        :access_token_path  => "/Oauth/AccessToken",
-        :authorize_path     => "/Oauth/Authorize"
-      })
-
+      generate_consumer(key, secret)
       @request_token = @consumer.get_request_token :oauth_callback => callback
-
       @request_token.authorize_url
+    end
+    
+    def generate_access_token(consumer_key, consumer_secret, access_key, access_secret)
+      generate_consumer(consumer_key, consumer_secret)
+      @access_token = OAuth::AccessToken.new(@consumer, access_key, access_secret)
     end
 
     # example callback: "http://example.com/?oauth_token=0721023CAA76ECF37F4C314DA8A87C38BC&oauth_verifier=F5F194F52CCACC1B9A9F0CE6CB4163E0AB"
@@ -25,8 +23,16 @@ module Trademe
     end
 
     def authorized?
-      !!consumer && !!request_token && !!access_token
+      !!consumer && !!access_token
     end
     
+    def generate_consumer(key, secret)
+      @consumer = OAuth::Consumer.new(key, secret, { 
+        :site               => "https://secure.trademe.co.nz",
+        :request_token_path => "/Oauth/RequestToken",
+        :access_token_path  => "/Oauth/AccessToken",
+        :authorize_path     => "/Oauth/Authorize"
+      })
+    end
   end
 end
