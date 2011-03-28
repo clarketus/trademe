@@ -27,5 +27,11 @@ module Trademe
 
       send_request(url)
     end
+    
+    def delivery_addresses
+      url = "#{base_url}/MyTradeMe/DeliveryAddresses.#{@format}"
+
+      send_request(url)
+    end
   end
 end
