@@ -23,6 +23,13 @@ module Trademe
       response["List"].map{|hash| Models::Listing.new(hash) } if response["List"]
     end
     
+    def get_listing(listing_id)
+      url = "#{base_url}/Listings/#{listing_id}.#{@format}"
+      
+      response = send_request(url)
+      Models::Listing.new(response)
+    end
+    
     private
     
       def urlize(params)
