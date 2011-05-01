@@ -19,15 +19,13 @@ module Trademe
       url = "#{base_url}/Search/#{term}.#{@format}"
       url << "?#{urlize(filters)}" unless filters.empty?
 
-      response = send_request(url)
-      response["List"].map{|hash| Models::Listing.new(hash) } if response["List"]
+      send_request(url)
     end
     
     def get_listing(listing_id)
       url = "#{base_url}/Listings/#{listing_id}.#{@format}"
       
-      response = send_request(url)
-      Models::Listing.new(response)
+      send_request(url)
     end
     
     private

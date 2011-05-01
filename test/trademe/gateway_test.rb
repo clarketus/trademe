@@ -15,11 +15,11 @@ class GatewayTest < Test::Unit::TestCase
       
         should "run search queries that return an array of listings" do
           res = @gateway.search "property/residential", :search_string => "nice"
-          setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))["List"].map{|hash| Trademe::Models::Listing.new(hash) }
+          setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))
         
-          assert res.map{|l| l.id } == setup.map{|l| l.id }
+          assert res["List"].map{|l| l["ListingId"] } == setup["List"].map{|l| l["ListingId"] }
         
-          assert res.first.address_as_string == "46 Highbury Drive Levin, Levin, Horowhenua, Manawatu / Wanganui, New Zealand"
+          assert res["List"].first["Address"] == "46 Highbury Drive Levin"
         end
       end
 
@@ -30,11 +30,11 @@ class GatewayTest < Test::Unit::TestCase
       
         should "accept a time arguement, correctly parse into a date string and then return listing array" do
           res = @gateway.search "property/residential", :search_string => "nice", :date_from => Time.parse("Wed, 03 Nov 2010 05:29:02 UTC 00:00")
-          setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))["List"].map{|hash| Trademe::Models::Listing.new(hash) }
+          setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))
         
-          assert res.map{|l| l.id } == setup.map{|l| l.id }
+          assert res["List"].map{|l| l["ListingId"] } == setup["List"].map{|l| l["ListingId"] }
         
-          assert res.first.address_as_string == "46 Highbury Drive Levin, Levin, Horowhenua, Manawatu / Wanganui, New Zealand"
+          assert res["List"].first["Address"] == "46 Highbury Drive Levin"
         end
       end
     
@@ -75,8 +75,8 @@ class GatewayTest < Test::Unit::TestCase
         
         should "return Listing" do
           listing = @gateway.get_listing(@listing_id)
-          assert_equal @listing_id, listing.id.to_i
-          assert_equal "Fabulous Family Living in Brooklyn!", listing.data["Title"]
+          assert_equal @listing_id, listing["ListingId"].to_i
+          assert_equal "Fabulous Family Living in Brooklyn!", listing["Title"]
         end
       
       end

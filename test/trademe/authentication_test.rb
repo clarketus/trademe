@@ -52,9 +52,9 @@ class AuthenticationTest < Test::Unit::TestCase
             assert @gateway.authorized?
             
             res = @gateway.search "property/residential", :search_string => "nice"
-            setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))["List"].map{|hash| Trademe::Models::Listing.new(hash) }
+            setup = Yajl::Parser.new.parse(open_mock("listing_search.json"))
 
-            assert res.map{|l| l.id } == setup.map{|l| l.id }
+            assert res["List"].map{|l| l["id"] } == setup["List"].map{|l| l["id"] }
           end
         end
         

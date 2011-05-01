@@ -19,8 +19,6 @@ PLATFORMS
 
 DEPENDENCIES
   mocha
-  oauth
   shoulda
   test-unit
   trademe!
-  yajl-ruby
