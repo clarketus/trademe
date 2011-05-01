@@ -10,4 +10,5 @@ module Trademe
 end
 
 require "trademe/authentication"
+require "trademe/my_trademe"
 require "trademe/gateway"

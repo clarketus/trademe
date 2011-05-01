@@ -6,6 +6,7 @@ module Trademe
     FORMAT = "json"
     
     include Authentication
+    include MyTrademe
     
     def initialize(opts={})
       @domain = opts[:domain] || DOMAIN
@@ -42,7 +43,7 @@ module Trademe
         }.join("&")
       end
 
-      def send_request(path)        
+      def send_request(path)
         response = if !authorized?        
           uri = URI.parse("#{protocol}://#{@domain}")
           Net::HTTP.get uri.host, path
@@ -52,7 +53,9 @@ module Trademe
         end
                 
         json = ::Yajl::Parser.new.parse(response)
-        raise ApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
+        unless json.is_a?(Array)
+          raise ApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
+        end
         json
       rescue ::Yajl::ParseError => e
         raise ApiError.new "Bad JSON response #{response.inspect}"
