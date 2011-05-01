@@ -53,9 +53,7 @@ module Trademe
         end
                 
         json = ::Yajl::Parser.new.parse(response)
-        unless json.is_a?(Array)
-          raise ApiError.new "#{json["ErrorDescription"]}" if json["ErrorDescription"]
-        end
+        raise ApiError.new "#{json["ErrorDescription"]}" if !json.is_a?(Array) && json["ErrorDescription"]
         json
       rescue ::Yajl::ParseError => e
         raise ApiError.new "Bad JSON response #{response.inspect}"
