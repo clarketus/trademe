@@ -34,14 +34,15 @@ Gem::Specification.new do |s|
     lib/trademe.rb
     lib/trademe/authentication.rb
     lib/trademe/gateway.rb
-    lib/trademe/models/authenticated_user.rb
-    lib/trademe/models/listing.rb
-    lib/trademe/models/user.rb
+    lib/trademe/my_trademe.rb
     test/mocks/bad_response.json
     test/mocks/listing_search.json
+    test/mocks/listings/get.error.json
+    test/mocks/listings/get.json
     test/test.rb
     test/trademe/authentication_test.rb
     test/trademe/gateway_test.rb
+    test/trademe/my_trademe_test.rb
     trademe.gemspec
   ]
   # = MANIFEST =
