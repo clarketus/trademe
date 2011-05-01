@@ -5,3 +5,7 @@
 0.1.1, 11/3/2011
 * fixed bug for ruby 1.9.2-p180
 * upgraded gemspec and Gemfile to better format
+
+0.2.0, 30/4/2011
+* added additional API endpoints for my_trademe and individual listing information, thanks to armstrjare, nigelramsay and pchilton on github!
+* made all endpoints return just the parsed JSON and removed the partially implemented object wrapper. Can look at adding this back in at a later stage.

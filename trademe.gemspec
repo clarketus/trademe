@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.6'
   
   s.name        = "trademe"
-  s.version     = '0.1.1'
+  s.version     = '0.2.0'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Oliver Clarke"]
   s.email       = ["ollie@clarketus.net"]
