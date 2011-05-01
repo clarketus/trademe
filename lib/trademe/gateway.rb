@@ -66,8 +66,13 @@ module Trademe
       def base_url
         "/#{@version}"
       end
+      
+      def check_authentication
+        raise MustBeAuthenticated.new unless authorized?
+      end
     
   end
   
   class ApiError < StandardError; end
+  class MustBeAuthenticated < StandardError; end
 end
