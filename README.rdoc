@@ -26,12 +26,12 @@ Perform API searches via:
 
   gateway.search "property/residential", :search_string => "flash apartment", :date_from => 4.hours.ago
 
-This will return an Array of Trademe::Models::Listing
+This will return the parsed JSON response
 
 
 == To come:
 
-Planning to add these very soon!
+Planning to add these at some point:
 * Total API coverage
 * Requests for private data that needs authentication
 * Write requests
